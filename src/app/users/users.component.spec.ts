@@ -55,6 +55,7 @@ url: "https://api.github.com/users/mojombo"
     service = fixture.debugElement.injector.get(GetDataService);
     httpMock = fixture.debugElement.injector.get(HttpTestingController);
     fixture.detectChanges();
+    
   });
 
   it('should create', () => {
@@ -65,6 +66,7 @@ url: "https://api.github.com/users/mojombo"
   it('should call ngOnInit', () => {
     let spy_getPostDetails = spyOn(component,"getUsers").and.returnValue();
     component.ngOnInit();
+    expect(component.getUsers).toHaveBeenCalled();
     expect(component.users).toEqual([]);
   })
   
@@ -118,10 +120,34 @@ url: "https://api.github.com/users/mojombo"
     buttonElement.triggerEventHandler('click', null);
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      expect(component.callInterval).toBeTruthy();
+      if(!component.callInterval)
+       expect(component.callInterval).toBeTruthy();
+       else
+       expect(component.callInterval).toBeNull;
       
     });
 
-  })
+  });
+
+  it('should call automatic function', () => {
+    const fnc = spyOn(component, 'automatic');
+    const pn = 4;
+    component.pageChange(pn);
+    
+    if(component.callInterval){
+      expect(component.callInterval).toBeNull;
+      expect(fnc).toHaveBeenCalled();
+      
+    }
+     
+
+  });
+  
+ it('should call next', () => {
+  const fnc = spyOn(component, 'next');
+   component.automatic();
+   if(!component.callInterval)
+   expect(fnc).toHaveBeenCalled();
+ })
 
 });

@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit {
   pageSize = 5;
   disableNext = false;
   callInterval: any;
-  n = 0;
+  
 
 
   constructor(private _getData: GetDataService) {
