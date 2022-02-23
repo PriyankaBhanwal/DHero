@@ -15,7 +15,7 @@ describe('AppComponent', () => {
       ],
       schemas: [
         NO_ERRORS_SCHEMA
-    ]
+      ]
     }).compileComponents();
   });
 

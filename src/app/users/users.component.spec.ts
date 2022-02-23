@@ -9,6 +9,7 @@ import { Users, UsersComponent } from './users.component';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { By } from '@angular/platform-browser';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -60,13 +61,13 @@ url: "https://api.github.com/users/mojombo"
     expect(component).toBeTruthy();
   });
 
-  /*
+  
   it('should call ngOnInit', () => {
     let spy_getPostDetails = spyOn(component,"getUsers").and.returnValue();
     component.ngOnInit();
     expect(component.users).toEqual([]);
-  })*/
-  /*
+  })
+  
   it('should call getUsers and get response as empty array', fakeAsync(() => {
     
     let fixture = TestBed.createComponent(UsersComponent);
@@ -81,36 +82,8 @@ url: "https://api.github.com/users/mojombo"
     component.getUsers();
     tick(100);
     expect(component.users).toEqual([]);
-  })) ; */
-  it('should call getUsers and get response as not an empty array', fakeAsync(() => {
-    
-    let fixture = TestBed.createComponent(UsersComponent);
-    let component = fixture.componentInstance;
-    component.getUsers();
-    console.log(component,'get');
-    //expect(component.users).toEqual(testUsers);
-     
-    let spy_getPosts = spyOn(service,"getUsers").and.callFake(() => {
-      return Rx.of(testUsers).pipe(delay(100));
-    });
-    component.getUsers();
-    tick(100);
-    expect(component.users).toEqual(testUsers);
-  })) ;
-
-/*
-  it('should return an Observable<User[]>', () => {
+  })) ; 
   
-   
-//console.log(httpMock.expectOne(`${service.url}`,'haaa'))
-   // const req = httpMock.expectOne(`${service.url}`);
-    const req = httpMock.match(service.url);
-    console.log(req.length,'show length')
-    //expect(req.request.method).toBe("GET");
-   // req.flush(testUsers);
-    httpMock.verify();
-  }); */
-
   it('should test the table ', (done) => {
     
   
@@ -139,5 +112,16 @@ url: "https://api.github.com/users/mojombo"
     });
   });
 
+  it ('should have loading button',() => {
+    let buttonElement = fixture.debugElement.query(By.css('.autobutton'));
+    expect(buttonElement).toBeTruthy();
+    buttonElement.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.callInterval).toBeTruthy();
+      
+    });
+
+  })
 
 });

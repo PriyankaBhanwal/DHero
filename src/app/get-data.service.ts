@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetDataService {
-  url='https://api.github.com/users';
-  constructor(private http:HttpClient) { }
+  url = 'https://api.github.com/users';
+  constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any>{
-    
+  getUsers(): Observable<any> {
+
     return this.http.get(this.url);
   }
 }

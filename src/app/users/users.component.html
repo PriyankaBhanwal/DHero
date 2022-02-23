@@ -1,22 +1,22 @@
 <div>
-<table>
-    <tr>
-        <th>Username</th>
-        <th>About</th>
-    </tr>
-    <tr *ngFor='let user of users | paginate: {currentPage: page, itemsPerPage: pageSize, totalItems:total}'>
-        <td>{{user.login}}</td>
-        <td *ngIf='user.id %2 !=0'><img [src]='user.avatar_url' alt={{user.avatar_url}}/></td>
-        <td *ngIf='user.id %2 === 0'>{{user.avatar_url}}</td>
-        <br>
-    </tr>
-   
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>About</th>
+        </tr>
+        <tr *ngFor='let user of users | paginate: {currentPage: page, itemsPerPage: pageSize, totalItems:total}'>
+            <td>{{user.login}}</td>
+            <td *ngIf='user.id %2 !=0'><img [src]='user.avatar_url' alt={{user.avatar_url}} /></td>
+            <td *ngIf='user.id %2 === 0'>{{user.avatar_url}}</td>
+            <br>
+        </tr>
 
-</table>
-<!--<button [disabled]='disableNext' (click)="next()">Next</button> -->
 
-<pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
+    </table>
+    <!--<button [disabled]='disableNext' (click)="next()">Next</button> -->
+
+    <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
 </div>
 <div>
-<button  (click)="automatic()">Start/Stop</button>
+    <button (click)="automatic()" class="autobutton">Start/Stop</button>
 </div>
